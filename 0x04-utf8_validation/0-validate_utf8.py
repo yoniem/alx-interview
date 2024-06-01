@@ -1,55 +1,42 @@
 #!/usr/bin/python3
+"""
+UTF-8 Validation
+"""
+
+
 def validUTF8(data):
     """
-    Validate if a given list of integers is a valid UTF-8 encoding.
-    
-    Args:
-    data (List[int]): List of integers representing bytes.
-    
-    Returns:
-    bool: True if data is a valid UTF-8 encoding, else False.
+    Determines if a given data set represents a valid UTF-8 encoding.
     """
-    # Number of bytes remaining in the current UTF-8 character
-    num_bytes = 0
-    
-    # Masks for checking the most significant bits
-    mask1 = 1 << 7
-    mask2 = 1 << 6
-    
-    # Iterate through each integer in the data list
+    bytes_to_follow = 0
+
     for byte in data:
-        mask = 1 << 7
-        if num_bytes == 0:
-            # Determine the number of bytes in the UTF-8 character
-            while mask & byte:
-                num_bytes += 1
-                mask = mask >> 1
-            
-            # For 1 byte character
-            if num_bytes == 0:
+        byte = byte & 255  # ensure only 8 bits are considered
+        if bytes_to_follow == 0:
+            if byte >> 7 == 0:
                 continue
-            
-            # If the number of bytes is more than 4 or 1, it's invalid
-            if num_bytes == 1 or num_bytes > 4:
+            elif byte >> 5 == 0b110:
+                bytes_to_follow = 1
+            elif byte >> 4 == 0b1110:
+                bytes_to_follow = 2
+            elif byte >> 3 == 0b11110:
+                bytes_to_follow = 3
+            else:
                 return False
         else:
-            # For subsequent bytes, they must start with '10'
-            if not (byte & mask1 and not (byte & mask2)):
+            if byte >> 6 != 0b10:
                 return False
-        
-        # Decrement the number of bytes remaining
-        num_bytes -= 1
-    
-    # If there are remaining bytes expected, it's invalid
-    return num_bytes == 0
+            bytes_to_follow -= 1
 
-# Example usage
+    return bytes_to_follow == 0
+
+
 if __name__ == "__main__":
-    data1 = [65]
-    print(validUTF8(data1))  # True
+    data = [65]
+    print(validUTF8(data))
 
-    data2 = [80, 121, 116, 104, 111, 110, 32, 105, 115, 32, 99, 111, 111, 108, 33]
-    print(validUTF8(data2))  # True
+    data = [80, 121, 116, 104, 111, 110, 32, 105, 115, 32, 99, 111, 111, 108, 33]
+    print(validUTF8(data))
 
-    data3 = [229, 65, 127, 256]
-    print(validUTF8(data3))  # False
+    data = [240, 188, 128, 167]
+    print(validUTF8(data))
