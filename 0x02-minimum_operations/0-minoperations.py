@@ -16,7 +16,7 @@ def minOperations(n):
              Returns 0 if n is impossible to achieve.
     """
     if n <= 1:
-        return n
+        return 0
     operations = 0
     divisor = 2
     while n > 1:
