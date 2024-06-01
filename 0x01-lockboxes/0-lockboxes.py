@@ -1,3 +1,12 @@
+#!/usr/bin/python3
+
+"""
+Lockboxes Module
+~~~~~~~~~~~~~~~~
+
+This module provides functions to solve lockbox-related problems.
+"""
+
 def can_unlock_all(boxes):
     """
     Determine if all the boxes can be unlocked.
