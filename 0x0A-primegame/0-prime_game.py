@@ -10,10 +10,10 @@ def sieve_of_eratosthenes(max_num):
     Generate a list of prime numbers up to max_num using the Sieve of Eratosthenes.
 
     Args:
-    - max_num (int): Maximum number up to which primes should be generated.
+    max_num (int): Maximum number up to which primes should be generated.
 
     Returns:
-    - list: List of prime numbers up to max_num.
+    list: List of prime numbers up to max_num.
     """
     is_prime = [True] * (max_num + 1)
     is_prime[0] = is_prime[1] = False  # 0 and 1 are not primes
@@ -31,11 +31,11 @@ def isWinner(x, nums):
     Determine the winner of multiple rounds of the prime game.
 
     Args:
-    - x (int): Number of rounds of the game.
-    - nums (list): List of integers representing different rounds.
+    x (int): Number of rounds of the game.
+    nums (list): List of integers representing different rounds.
 
     Returns:
-    - str or None: Name of the player with the most wins ('Maria' or 'Ben'), or None if no winner can be determined.
+    str or None: Name of the player with the most wins ('Maria' or 'Ben'), or None if no winner can be determined.
     """
     if not nums or x < 1:
         return None
@@ -65,3 +65,6 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
+
+# PEP8 validation: Make sure your lines are not longer than 79 characters, 
+# use consistent indentation, and other styling issues are addressed.
