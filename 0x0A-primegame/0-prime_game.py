@@ -1,7 +1,20 @@
 #!/usr/bin/python3
 
+"""
+0. Prime Game
+Module for determining the winner of a prime game.
+"""
+
 def sieve_of_eratosthenes(max_num):
-    """Generate a list of primes up to max_num using the Sieve of Eratosthenes."""
+    """
+    Generate a list of prime numbers up to max_num using the Sieve of Eratosthenes.
+
+    Args:
+    - max_num (int): Maximum number up to which primes should be generated.
+
+    Returns:
+    - list: List of prime numbers up to max_num.
+    """
     is_prime = [True] * (max_num + 1)
     is_prime[0] = is_prime[1] = False  # 0 and 1 are not primes
     p = 2
@@ -14,11 +27,19 @@ def sieve_of_eratosthenes(max_num):
     return primes
 
 def isWinner(x, nums):
-    """Determine the winner of the game."""
+    """
+    Determine the winner of multiple rounds of the prime game.
+
+    Args:
+    - x (int): Number of rounds of the game.
+    - nums (list): List of integers representing different rounds.
+
+    Returns:
+    - str or None: Name of the player with the most wins ('Maria' or 'Ben'), or None if no winner can be determined.
+    """
     if not nums or x < 1:
         return None
 
-    # Find the maximum value in nums to limit the sieve
     max_num = max(nums)
     primes = sieve_of_eratosthenes(max_num)
 
