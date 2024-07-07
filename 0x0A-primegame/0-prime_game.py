@@ -1,29 +1,28 @@
 #!/usr/bin/python3
-
 """
 0. Prime Game
 Module for determining the winner of a prime game.
 """
 
-def sieve_of_eratosthenes(max_num):
+def sieve_of_eratosthenes(n):
     """
-    Generate a list of prime numbers up to max_num using the Sieve of Eratosthenes.
+    Generate a list of prime numbers up to n using the Sieve of Eratosthenes.
 
     Args:
-    max_num (int): Maximum number up to which primes should be generated.
+    n (int): Maximum number up to which primes should be generated.
 
     Returns:
-    list: List of prime numbers up to max_num.
+    list: List of prime numbers up to n.
     """
-    is_prime = [True] * (max_num + 1)
+    is_prime = [True] * (n + 1)
     is_prime[0] = is_prime[1] = False  # 0 and 1 are not primes
     p = 2
-    while (p * p <= max_num):
+    while (p * p <= n):
         if is_prime[p]:
-            for i in range(p * p, max_num + 1, p):
+            for i in range(p * p, n + 1, p):
                 is_prime[i] = False
         p += 1
-    primes = [p for p in range(max_num + 1) if is_prime[p]]
+    primes = [p for p in range(n + 1) if is_prime[p]]
     return primes
 
 def isWinner(x, nums):
@@ -42,22 +41,31 @@ def isWinner(x, nums):
 
     max_num = max(nums)
     primes = sieve_of_eratosthenes(max_num)
+    prime_set = set(primes)
 
     maria_wins = 0
     ben_wins = 0
 
     for n in nums:
-        primes_set = set(primes[:n + 1])
+        remaining = list(range(1, n + 1))
         current_player = "Maria"
-        while primes_set:
-            prime_to_remove = min(primes_set)
-            primes_set -= set(range(prime_to_remove, n + 1, prime_to_remove))
+
+        while True:
+            move_made = False
+            for prime in primes:
+                if prime in remaining:
+                    remaining = [num for num in remaining if num % prime != 0]
+                    move_made = True
+                    break
+
+            if not move_made:
+                if current_player == "Maria":
+                    ben_wins += 1
+                else:
+                    maria_wins += 1
+                break
+
             current_player = "Ben" if current_player == "Maria" else "Maria"
-        
-        if current_player == "Ben":
-            maria_wins += 1
-        else:
-            ben_wins += 1
 
     if maria_wins > ben_wins:
         return "Maria"
@@ -65,6 +73,3 @@ def isWinner(x, nums):
         return "Ben"
     else:
         return None
-
-# PEP8 validation: Make sure your lines are not longer than 79 characters, 
-# use consistent indentation, and other styling issues are addressed.
