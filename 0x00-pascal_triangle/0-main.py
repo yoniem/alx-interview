@@ -12,23 +12,20 @@ def print_triangle(triangle):
         print("[{}]".format(",".join([str(x) for x in row])))
 
 if __name__ == "__main__":
-    print("n = 5:")
+    # Test cases
+    print("n = 5")
     print_triangle(pascal_triangle(5))
-    print()  # For better separation
-
-    print("n = 1:")
+    
+    print("\nn = 1")
     print_triangle(pascal_triangle(1))
-    print()  # For better separation
-
-    print("n = 0:")
-    print_triangle(pascal_triangle(0))
-    print()  # For better separation
-
-    print("n = 10:")
+    
+    print("\nn = 0")
+    print(pascal_triangle(0))  # Should return an empty list
+    
+    print("\nn = 10")
     print_triangle(pascal_triangle(10))
-    print()  # For better separation
-
-    # For large n, like 100, it's better to just check the last row
-    print("n = 100 (last row):")
-    triangle = pascal_triangle(100)
-    print("[{}]".format(",".join([str(x) for x in triangle[-1]])))
+    
+    print("\nn = 100")
+    # For large n, we won't print the entire triangle, just the length
+    large_triangle = pascal_triangle(100)
+    print("Length of Pascal's Triangle with n=100:", len(large_triangle))
