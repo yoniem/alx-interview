@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+0-island_perimeter
+"""
+
 def island_perimeter(grid):
     """
     Calculate the perimeter of the island in the grid.
@@ -6,10 +10,13 @@ def island_perimeter(grid):
     :param grid: List of list of integers representing the grid
     :return: Integer representing the perimeter of the island
     """
+    if not grid or not grid[0]:
+        return 0
+
     perimeter = 0
     rows = len(grid)
-    cols = len(grid[0]) if rows > 0 else 0
-    
+    cols = len(grid[0])
+
     for r in range(rows):
         for c in range(cols):
             if grid[r][c] == 1:
@@ -22,7 +29,5 @@ def island_perimeter(grid):
                     perimeter += 1
                 if c == cols - 1 or grid[r][c + 1] == 0:  # Right
                     perimeter += 1
-    
-    return perimeter
 
-# Test cases can be run here to verify the solution.
+    return perimeter
