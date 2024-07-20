@@ -7,6 +7,7 @@ Lockboxes Module
 This module provides functions to solve lockbox-related problems.
 """
 
+
 def canUnlockAll(boxes):
     """
     Determine if all the boxes can be unlocked.
