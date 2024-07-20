@@ -7,7 +7,7 @@ Lockboxes Module
 This module provides functions to solve lockbox-related problems.
 """
 
-def can_unlock_all(boxes):
+def canUnlockAll(boxes):
     """
     Determine if all the boxes can be unlocked.
 
@@ -19,7 +19,7 @@ def can_unlock_all(boxes):
     """
     # Set to keep track of unlocked boxes
     unlocked_boxes = {0}
-    
+
     # List to keep track of boxes yet to be checked
     boxes_to_check = [0]
 
