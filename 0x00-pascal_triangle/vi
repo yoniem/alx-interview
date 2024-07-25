@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+"""
+0-main
+"""
+pascal_triangle = __import__('0-pascal_triangle').pascal_triangle
+
+def print_triangle(triangle):
+    """
+    Print the triangle
+    """
+    for row in triangle:
+        print("[{}]".format(",".join([str(x) for x in row])))
+
+
+if __name__ == "__main__":
+    print_triangle(pascal_triangle(5))
+    print()
+    print_triangle(pascal_triangle(1))
+    print()
+    print_triangle(pascal_triangle(0))
+    print()
+    print_triangle(pascal_triangle(10))
+    # Testing for n=100 is usually too large to print
+    # but you can ensure it works without printing
+    triangle_100 = pascal_triangle(100)
+    print(len(triangle_100))  # Should print 100

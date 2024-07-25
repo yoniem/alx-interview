@@ -1,31 +1,28 @@
 #!/usr/bin/python3
 """
-0-main
+Module to generate Pascal's Triangle
 """
-pascal_triangle = __import__('0-pascal_triangle').pascal_triangle
 
-def print_triangle(triangle):
+def pascal_triangle(n):
     """
-    Print the triangle
-    """
-    for row in triangle:
-        print("[{}]".format(",".join([str(x) for x in row])))
+    Returns a list of lists of integers representing Pascal’s triangle of n
 
-if __name__ == "__main__":
-    # Test cases
-    print("n = 5")
-    print_triangle(pascal_triangle(5))
+    Args:
+        n (int): The number of rows of Pascal's Triangle to generate
+
+    Returns:
+        List[List[int]]: Pascal's Triangle up to n rows
+    """
+    if n <= 0:
+        return []
     
-    print("\nn = 1")
-    print_triangle(pascal_triangle(1))
+    triangle = [[1]]
     
-    print("\nn = 0")
-    print(pascal_triangle(0))  # Should return an empty list
+    for i in range(1, n):
+        row = [1]
+        for j in range(1, i):
+            row.append(triangle[i-1][j-1] + triangle[i-1][j])
+        row.append(1)
+        triangle.append(row)
     
-    print("\nn = 10")
-    print_triangle(pascal_triangle(10))
-    
-    print("\nn = 100")
-    # For large n, we won't print the entire triangle, just the length
-    large_triangle = pascal_triangle(100)
-    print("Length of Pascal's Triangle with n=100:", len(large_triangle))
+    return triangle
